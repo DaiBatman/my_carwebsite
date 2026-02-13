@@ -27,3 +27,11 @@
   <img src="car.png" class="car" alt="car">
 </body>
 </html>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const car = document.querySelector('.car');
+    const scrollX = window.scrollY * 1.5; // 速度調整
+    car.style.transform = `translateX(${scrollX}px)`;
+  });
+</script>
