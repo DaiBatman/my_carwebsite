@@ -2,36 +2,58 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Car Animation</title>
+  <title>Click to Drive</title>
   <style>
     body {
-      overflow-x: hidden;
-      background: #f0f0f0;
+      margin: 0;
+      overflow-x: scroll;
+      white-space: nowrap;
+      scroll-behavior: smooth;
+      background: #e0f7ff;
+    }
+
+    .road {
+      display: inline-block;
+      width: 3000px; /* 横に長い道 */
+      height: 100vh;
+      background: linear-gradient(#ccc 40%, #999 40%);
+      position: relative;
     }
 
     .car {
-      position: absolute;
-      top: 200px;
-      left: -200px;
+      position: fixed;
+      bottom: 50px;
+      left: 50px;
       width: 150px;
-      animation: drive 5s linear infinite;
+      cursor: pointer;
+      transition: transform 0.1s;
     }
 
-    @keyframes drive {
-      0% { left: -200px; }
-      100% { left: 100vw; }
+    .car:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
 <body>
-  <img src="car.png" class="car" alt="car">
+
+  <img src="car.png" class="car" id="car" alt="car">
+
+  <div class="road"></div>
+
+  <script>
+    const car = document.getElementById('car');
+
+    car.addEventListener('click', () => {
+      // 現在のスクロール位置
+      const current = window.scrollX;
+
+      // クリックで 300px 進む
+      window.scrollTo({
+        left: current + 300,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+
 </body>
 </html>
-
-<script>
-  window.addEventListener('scroll', () => {
-    const car = document.querySelector('.car');
-    const scrollX = window.scrollY * 1.5; // 速度調整
-    car.style.transform = `translateX(${scrollX}px)`;
-  });
-</script>
